@@ -24,3 +24,6 @@ Este é um projeto de lista de tarefas (To-Do List) desenvolvido em C. O program
   - `status`: Altera o status de uma tarefa.
   - `ordenar`: Ordena as tarefas por prioridade.
 
+## Contato
+
+Para mais informações, entre em contato via [mb685212@gmail.com](mailto:mb685212@gmail.com) ou [linkedin](https://linkedin.com/in/mateus-barros13)
