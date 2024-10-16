@@ -15,13 +15,74 @@ void exibir(struct ToDo tarefas[100], int *numTarefas);
 int excluir(struct ToDo tarefas[100], int *numTarefas);
 int editar(struct ToDo tarefas[100], int *numTarefas);
 int ordenar(struct ToDo tarefas[100], int *numTarefas);
-int buscar();
-void concluida();
+int buscar(int l, int r, char* alvo, struct ToDo tarefas[]);
+int status(struct ToDo tarefas[100], int *numTarefas);
 
 int main(void)
 {
     struct ToDo tarefas[100];
     int numTarefas = 0;
+    int escolha;
+    char alvo[25];
+
+    do {
+        printf("\n\t Menu Principal \t\n");
+        printf("\n");
+        printf("1. Adicionar Tarefa.\n");
+        printf("2. Exibir Tarefas.\n");
+        printf("3. Excluir Tarefa.\n");
+        printf("4. Editar Tarefa.\n");
+        printf("5. Buscar Tarefa.\n");
+        printf("6. Alterar Status.\n");
+        printf("7. Sair\n");
+        scanf("%d", &escolha);
+        printf("\n");
+
+        switch (escolha)
+        {
+        case 1:
+            adicionar(tarefas, &numTarefas);
+            break;
+        case 2:
+            exibir(tarefas, &numTarefas);
+            break;
+        case 3:
+            excluir(tarefas, &numTarefas);
+            break;
+        case 4:
+            editar(tarefas, &numTarefas);
+            break;
+        case 5:
+            printf("Digite qual tarefa deseja buscar: ");
+            scanf("%s", alvo);
+            int index = buscar(0, numTarefas - 1, alvo, tarefas);
+            if (index != -1) {
+                printf("%s | Prioridade: %d | ", tarefas[index].titulo, tarefas[index].prioridade);
+                if (tarefas[index].status == false)
+                    printf("Status: Ativo\n");
+                else
+                    printf("Status: Concluido\n");
+                printf("%s\n", tarefas[index].descricao);
+                printf("---------------------------------\n");
+                printf("\n");
+            }
+            else
+                printf("Tarefa nao encontrada!\n");
+            break;
+        case 6:
+            status(tarefas, &numTarefas);
+            break;
+        case 7:
+            printf("Encerrando programa...\n");
+            return 0;
+            break;
+        
+        default:
+            printf("Opcao invalida, Tente novamente!\n");
+            break;
+        }
+
+    } while (escolha != 7);
 
 }
 
@@ -112,4 +173,29 @@ int buscar(int l, int r, char* alvo, struct ToDo tarefas[]) {
         return buscar(l, meio - 1, alvo, tarefas);
     else
         return buscar(meio + 1, r, alvo, tarefas);
+}
+
+int status(struct ToDo tarefas[100], int *numTarefas) {
+    char nome[25];
+    printf("Digite qual tarefa deseja alterar status: ");
+    scanf("%s", nome);
+
+    for (int i = 0; i < *numTarefas; i++) {
+        if (strcmp(nome, tarefas[i].titulo) == 0) {
+            if (tarefas[i].status == false) {
+                tarefas[i].status = true;
+                printf("Status atualizadp\n");
+                return 0;
+            }
+                
+            else {
+                tarefas[i].status = false;
+                printf("Status atualizadp\n");
+                return 0;
+            }
+                
+        }
+    }
+    printf("Tarefa nao encontrada!\n");
+    return -1;
 }
