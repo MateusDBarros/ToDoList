@@ -47,6 +47,7 @@ int main(void)
             adicionar(tarefas, &numTarefas); //Chama função adicionar
             break;
         case 2:
+            ordenar(tarefas, &numTarefas);
             exibir(tarefas, &numTarefas); //Chama função exibir
             break;
         case 3:
@@ -58,6 +59,7 @@ int main(void)
         case 5:
             printf("Digite qual tarefa deseja buscar: ");
             scanf("%s", alvo);
+            ordenar(tarefas, &numTarefas);
             int index = buscar(0, numTarefas - 1, alvo, tarefas); //Chama função buscar e coloca seu resultado em uma variavel
             if (index != -1) {
                 //Exibe a terefa encontrada
